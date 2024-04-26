@@ -1,0 +1,61 @@
+﻿@model AgendaApp.MVC.Models.Account.AccountLoginViewModel
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgendaApp : Autenticação de Usuários</title>
+    <link href="~/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="row mt-5">
+        <div class="col-md-4 offset-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="text-center">
+                        <img src="https://www.cotiinformatica.com.br/imagens/logo-coti-informatica.svg" />
+                        <h4>Autenticação de usuários</h4>
+                        <p>Entre com as suas credenciais de acesso.</p>
+                    </div>
+
+                    <div class="mb-3 text-center">
+                        <h5 class="text-danger">@TempData["MensagemErro"]</h5>
+                    </div>
+
+                    <div class="text-danger">
+                        @Html.ValidationSummary()
+                    </div>
+
+                    @using (Html.BeginForm())
+                    {
+                        <div class="mb-3">
+                            <label>Email de acesso:</label>
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                        </div>
+                        <div class="mb-3">
+                            <label>Senha de acesso:</label>
+                            @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                        </div>
+                        <div class="mb-3 d-grid">
+                            <input type="submit" class="btn btn-primary" value="Acessar Sistema" />
+                        </div>
+                        <div class="mb-3 d-grid">
+                            <a href="/Account/Register" class="btn btn-light">
+                                Não possui conta? <strong>Cadastre-se aqui!</strong>
+                            </a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+

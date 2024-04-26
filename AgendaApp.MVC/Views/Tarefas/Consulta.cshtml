@@ -1,0 +1,78 @@
+﻿@model AgendaApp.MVC.Models.Tarefas.TarefasConsultaViewModel
+
+@using AgendaApp.MVC.Models.Tarefas
+@{
+    var tarefas = new List<TarefasViewModel>();
+    if (TempData["Tarefas"] != null)
+    {
+        tarefas = (List<TarefasViewModel>)TempData["Tarefas"];
+    }
+}
+
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<h3>Consulta de tarefas</h3>
+<p>Listagem de tarefas cadastradas.</p>
+<hr />
+
+<div class="text-danger">
+    @Html.ValidationSummary()
+</div>
+
+<div class="mb-3">
+    <h4 class="text-success">@TempData["MensagemSucesso"]</h4>
+    <h4 class="text-danger">@TempData["MensagemErro"]</h4>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="row mb-3">
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.DataInicio, new { @class = "form-control", @type = "date" })
+        </div>
+        <div class="col-md-3">
+            @Html.TextBoxFor(model => model.DataFim, new { @class = "form-control", @type = "date" })
+        </div>
+        <div class="col-md-6">
+            <input type="submit" class="btn btn-success" value="Pesquisar Tarefas" />
+        </div>
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table table-sm">
+        <thead>
+            <tr>
+                <th>Nome da tarefa</th>
+                <th>Data e hora</th>
+                <th>Prioridade</th>
+                <th>Operações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in tarefas)
+            {
+                <tr>
+                    <td>@item.Nome</td>
+                    <td>@item.DataHora</td>
+                    <td>@item.Prioridade</td>
+                    <td>
+                        <button class="btn btn-sm btn-primary me-2">Editar</button>
+                        <button class="btn btn-sm btn-danger me-2">Excluir</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    Quantidade de registros: <span>@tarefas.Count</span>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+
